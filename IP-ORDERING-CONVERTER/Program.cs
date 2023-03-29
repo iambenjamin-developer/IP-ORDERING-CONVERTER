@@ -6,8 +6,21 @@ namespace IP_ORDERING_CONVERTER
     {
         static void Main(string[] args)
         {
+            /*
             Console.WriteLine(ToInt("10.250.24.7"));
             Console.WriteLine(ToAddr(134744072));
+            */
+
+            var ips = Methods.GetStringRandomList();
+            int i = 0;
+            foreach (var ip in ips)
+            {
+                Console.WriteLine($"new IpModel {{ Index = {i}, IP = \"{ip}\", DecimalIP = {ToInt(ip)} }},");
+
+                i++;
+            }
+
+
         }
 
         static long ToInt(string addr)
