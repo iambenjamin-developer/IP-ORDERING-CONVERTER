@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using IP_ORDERING_CONVERTER.Models;
+using System.Net;
 
 namespace IP_ORDERING_CONVERTER
 {
@@ -7,10 +8,12 @@ namespace IP_ORDERING_CONVERTER
         static void Main(string[] args)
         {
             /*
+            
             Console.WriteLine(ToInt("10.250.24.7"));
             Console.WriteLine(ToAddr(134744072));
             */
 
+            /*
             var ips = Methods.GetStringRandomList();
             int i = 0;
             foreach (var ip in ips)
@@ -19,8 +22,30 @@ namespace IP_ORDERING_CONVERTER
 
                 i++;
             }
+            */
+
+            Console.WriteLine("====ORDENAR IPs POR RANGO====");
+            Console.Write("Start: ");
+            string start = Console.ReadLine();
+            Console.Write("End: ");
+            string end = Console.ReadLine();
+
+            Console.WriteLine($"Inicio: {start} - Fin: {end}\n");
+
+            long startIpDecimal = ToInt(start);
+            long endIpDecimal = ToInt(end);
 
 
+            var ips = Methods.GetRandomList();
+
+            List<IpModel> ipModels = ips.Where(x => x.DecimalIP >= startIpDecimal && x.DecimalIP <= endIpDecimal)
+                            .OrderBy(x => x.DecimalIP)
+                            .ToList();
+
+            foreach (var ipModel in ipModels)
+            {
+                Console.WriteLine(ipModel.IP);
+            }
         }
 
         static long ToInt(string addr)
